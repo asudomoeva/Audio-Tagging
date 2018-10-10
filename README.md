@@ -10,12 +10,12 @@
 To achieve the goal, we will be cycling through Box’s loop [3]. Due to the complexity of the task, we propose two separate stages to address both the model performance (given a fixed number of labels) as well as generalizing to the complexity of real-world data (e.g. classifying sounds that were not in the training set).
 
 **Stage 1:** This stage will focus on tuning the model for the highest possible performance given a fixed number of labels. The test will be performed on a subset of the data with only training labels in place.
-![](stage1.png)
+![](charts/stage1.png)
 
 Having achieved a high performing model during stage 1, it would still not be representative of the real world (expected poor performance on sounds outside of the original labeling).
 
 **Stage 2:** This stage will focus on using Google’s AudioSet ontology tree to improve the model performance on new sounds (i.e. sounds whose labels were not part of original learning)
-![](stage2.png)
+![](charts/stage2.png)
 
 ## References
 
