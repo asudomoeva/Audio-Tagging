@@ -1,0 +1,12 @@
+pandas
+numpy
+seaborn
+matplotlib
+librosa
+scipy
+scikit-learn
+jupyter
+prettytable
+tqdm
+tensorflow
+tensorflow_probability
