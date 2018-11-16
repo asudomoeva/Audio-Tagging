@@ -10,3 +10,4 @@ prettytable
 tqdm
 tensorflow
 tensorflow_probability
+feather-format
