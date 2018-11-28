@@ -9,6 +9,7 @@ import pandas as pd
 import tensorflow as tf
 import tensorflow_probability as tfp
 from tensorflow.estimator.inputs import numpy_input_fn
+from sklearn.metrics import accuracy_score
 
 
 warnings.filterwarnings('ignore')
@@ -188,7 +189,7 @@ def predict_estimators(new_point, estimator_tuples):
 def fit_cnn_vae(train_data):
     estimators = []
     for label in train_data['label'].unique():
-        print("Training PPCA for label: {}".format(label))
+        print("Training VAE for label: {}".format(label))
         x_train = train_data.loc[train_data['label']
                                  == label].copy()
         x_train.pop('label')
@@ -230,3 +231,38 @@ def create_y_testdf(test_data):
     y_df['label_cat'] = y_df['label'].astype('category')
     y_df['label_int'] = y_df['label_cat'].cat.codes
     return y_df
+
+
+def predict_from_estimators(test_point, estimator_tuples):
+    max_likelihood = None
+    pred_label = None
+    ex = np.array([test_point.astype(np.float32)])
+    predict_input_fn = numpy_input_fn(
+        ex,
+        shuffle=False,
+        batch_size=1
+    )
+    for label, estimator in estimator_tuples:
+        pred = list(estimator.predict(predict_input_fn,
+                                      yield_single_examples=False))[0]
+        likelihood = pred['log_likelihood']
+        if max_likelihood is None or likelihood > max_likelihood:
+            pred_label = label
+            max_likelihood = likelihood
+    return pred_label
+
+
+def mixture_vae(test_data, estimators):
+    x_test = test_data.drop(['label'], axis=1)
+    predictions = []
+    for data_point in np.array(x_test):
+        pr = predict_from_estimators(data_point, estimators)
+        predictions.append(pr)
+    return predictions
+
+
+def mixvae_accuracy(test_data, predictions):
+    y_test = test_data['label']
+    accuracy = accuracy_score(y_test, predictions)
+    print('CNN VAE Mixture Classification Accuracy:{}%'.format(
+        accuracy*100))

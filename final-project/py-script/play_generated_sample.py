@@ -2,6 +2,7 @@ import random
 import IPython
 import IPython.display as ipd
 import librosa
+import librosa.display
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -16,4 +17,3 @@ def play_sample(training_results):
     plt.title('Audio Frequency Waveplot')
     librosa.display.waveplot(np.array(generated_samples[single_sample]),
                              sr=22050)
-    plt.show()
