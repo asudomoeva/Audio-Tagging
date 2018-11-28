@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import matplotlib
 import IPython
 import IPython.display as ipd
+
+
 matplotlib.style.use('seaborn')
 
 
@@ -22,7 +24,9 @@ def run_example(wavfile):
     librosa.display.specshow(Xdb, sr=sr, x_axis='time', y_axis='hz')
     plt.show()
 
+
 run_example('0ade0819.wav')
+
 
 def run_gen_example(wavfile):
     file_name = 'data_overview/audio-sample/{}'.format(wavfile)
@@ -38,4 +42,3 @@ def run_gen_example(wavfile):
     plt.title('Audio File Spectrogram')
     librosa.display.specshow(Xdb, sr=sr, x_axis='time', y_axis='hz')
     plt.show()
-
