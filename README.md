@@ -2,20 +2,19 @@
 ## Project Overview
 
 ### Description
+Due to the vastness of sounds we experience in the real world, no reliable automatic general-purpose audio tagging system currently exists. Many people still believe that audio-tagging presents one of the hardest machine learning problems today. We decided to challenge that perspective by tackling audio classification with probabilistic programming.
+
 **Goal:** Develop an automatic, general-purpose audio tagging system capable of accurately classifying sound collections for a wide range of real-world environments.
+
 
 **Data:** The original dataset is taken from Kaggle [1]. The samples (20,000 WAV files) are generated from Freesound's library and include things like musical instruments, domestic sounds, and animals [2]. Each input represents a WAV file with a corresponding annotative label. There are 41 labels overall, each generated from Google’s AudioSet ontology. The dataset also includes a boolean column indicating whether the label was manually verified.
 
-### Proposal
-To achieve the goal, we will be cycling through Box’s loop [3]. Due to the complexity of the task, we propose two separate stages to address both the model performance (given a fixed number of labels) as well as generalizing to the complexity of real-world data (e.g. classifying sounds that were not in the training set).
+### Approach
+To achieve the goal, we have cycled through Box’s loop [3]. Our journey consisted of 3 different iterations implementing Probabilistic PCA, and two versions of CNN VAE. 
 
-**Stage 1:** This stage will focus on tuning the model for the highest possible performance given a fixed number of labels. The test will be performed on a subset of the data with only training labels in place.
-![](charts/stage1.png)
+![](final-project/plots/journey.png)
 
-Having achieved a high performing model during stage 1, it would still not be representative of the real world (expected poor performance on sounds outside of the original labeling).
-
-**Stage 2:** This stage will focus on using Google’s AudioSet ontology tree to improve the model performance on new sounds (i.e. sounds whose labels were not part of original learning)
-![](charts/stage2.png)
+For details around model accuracies, generated samples, etc please consult *final-project* folder.
 
 ## References
 
